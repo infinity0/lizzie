@@ -1,0 +1,2 @@
+featurecat lizzie jar s/.*/debian/ * *
+org.json json jar s/.*/debian-latest/ * *

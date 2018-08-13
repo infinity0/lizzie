@@ -1,0 +1,40 @@
+Source: lizzie
+Section: games
+Priority: optional
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Uploaders: Ximin Luo <infinity0@debian.org>
+Build-Depends: debhelper (>= 11), default-jdk, maven-debian-helper (>= 2.1)
+Build-Depends-Indep: default-jdk-doc,
+ libandroid-json-org-java,
+ libandroid-json-org-java-doc,
+ libmaven-javadoc-plugin-java,
+ libmaven-shade-plugin-java (>= 3.1.1)
+Standards-Version: 4.1.4
+Vcs-Git: https://salsa.debian.org/java-team/lizzie.git
+Vcs-Browser: https://salsa.debian.org/java-team/lizzie
+Homepage: https://github.com/featurecat/lizzie
+
+Package: liblizzie-java
+Architecture: all
+Depends: ${misc:Depends}, ${maven:Depends}
+Recommends: leela-zero (>= 0.15+20180813)
+Suggests: ${maven:OptionalDepends}, liblizzie-java-doc
+Provides: lizzie (= ${binary:Version})
+Description: GUI for analyzing Go games in real time using Leela Zero
+ Features include:
+ .
+  - Show win rates and confidence levels for selected moves on the board
+  - Show best move sequence continuation, for these selected moves
+  - Displays a graph of winrate against move number
+  - Show whole game history including forked moves
+  - Interactive play including undo/redo
+  - Load and save games in SGF format
+
+Package: liblizzie-java-doc
+Architecture: all
+Section: doc
+Depends: ${misc:Depends}
+Recommends: ${maven:DocDepends}, ${maven:DocOptionalDepends}
+Suggests: liblizzie-java
+Description: Documentation for liblizzie-java
+ This package contains the API documentation of liblizzie-java.
