@@ -33,8 +33,10 @@ public class Config {
     public JSONObject uiConfig;
     public JSONObject persisted;
 
-    private String configFilename = "config.txt";
-    private String persistFilename = "persist";
+    public final String leelazShareDir = System.getProperty("user.home") + "/.local/share/leela-zero";
+    public final String leelazConfigDir = System.getProperty("user.home") + "/.config/leela-zero";
+    private String configFilename = leelazConfigDir + "/lizzie-config.txt";
+    private String persistFilename = leelazShareDir + "/lizzie-persist";
 
     private JSONObject loadAndMergeConfig(JSONObject defaultCfg, String fileName, boolean needValidation) throws IOException {
         File file = new File(fileName);
@@ -116,6 +118,8 @@ public class Config {
     }
 
     public Config() throws IOException {
+        new File(leelazConfigDir).mkdirs();
+        new File(leelazShareDir).mkdirs();
         JSONObject defaultConfig = createDefaultConfig();
         JSONObject persistConfig = createPersistConfig();
 
@@ -224,9 +228,8 @@ public class Config {
 
         // About engine parameter
         JSONObject leelaz = new JSONObject();
-        leelaz.put("network-file", "network.gz");
-        leelaz.put("engine-command", String.format("%s --gtp --lagbuffer 0 --weights %%network-file --threads 2",
-                getBestDefaultLeelazPath()));
+        leelaz.put("network-file", "%leelaz-share/best-network");
+        leelaz.put("engine-command", String.format("leelaz --gtp --lagbuffer 0 --weights %%network-file --threads 2"));
         leelaz.put("engine-start-location", ".");
         leelaz.put("max-analyze-time-minutes", 5);
         leelaz.put("max-game-thinking-time-seconds", 2);

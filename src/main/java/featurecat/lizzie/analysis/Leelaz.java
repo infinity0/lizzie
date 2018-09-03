@@ -90,8 +90,10 @@ public class Leelaz {
         File startfolder = new File(config.optString("engine-start-location", "."));
         String engineCommand = config.getString("engine-command");
         String networkFile = config.getString("network-file");
+        networkFile = networkFile.replaceAll("%leelaz-share", Lizzie.config.leelazShareDir);
         // substitute in the weights file
         engineCommand = engineCommand.replaceAll("%network-file", networkFile);
+        engineCommand = engineCommand.replaceAll("%leelaz-share", Lizzie.config.leelazShareDir);
         // create this as a list which gets passed into the processbuilder
         List<String> commands = Arrays.asList(engineCommand.split(" "));
 
